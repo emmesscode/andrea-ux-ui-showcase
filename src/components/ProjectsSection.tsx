@@ -53,11 +53,14 @@ const ProjectsSection = () => {
         const sectionHeight = rect.height;
         const viewportHeight = window.innerHeight;
         
+        // Adjust for header offset
+        const headerOffset = 200; // Account for header space
+        
         if (sectionTop <= viewportHeight && sectionTop + sectionHeight >= 0) {
-          const scrollProgress = Math.max(0, Math.min(1, (viewportHeight - sectionTop) / (sectionHeight + viewportHeight)));
-          const projectIndex = Math.floor(scrollProgress * projects.length);
+          const adjustedProgress = Math.max(0, Math.min(1, (viewportHeight - sectionTop - headerOffset) / (sectionHeight - headerOffset)));
+          const projectIndex = Math.floor(adjustedProgress * projects.length);
           setActiveProject(Math.min(projectIndex, projects.length - 1));
-          setScrollY(scrollProgress);
+          setScrollY(adjustedProgress);
         }
       }
     };
@@ -70,8 +73,8 @@ const ProjectsSection = () => {
   return (
     <section id="projects" ref={sectionRef} className="relative bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center py-24">
+        {/* Section Header - with proper spacing */}
+        <div className="text-center py-24 relative z-20">
           <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-6 opacity-0 animate-[fade-in_1s_ease-out_0.2s_forwards]">
             Selected Work
           </h2>
@@ -81,9 +84,9 @@ const ProjectsSection = () => {
         </div>
 
         {/* Main Content */}
-        <div className="flex items-start min-h-[200vh] relative">
+        <div className="flex items-start relative" style={{ minHeight: `${100 + (projects.length * 100)}vh` }}>
           {/* Fixed Image Container - Left Side */}
-          <div className="w-1/2 sticky top-1/2 transform -translate-y-1/2 pr-12">
+          <div className="w-1/2 sticky top-1/2 transform -translate-y-1/2 pr-12 z-10">
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
               {projects.map((project, index) => (
                 <div
@@ -106,11 +109,14 @@ const ProjectsSection = () => {
           </div>
 
           {/* Scrolling Text Content - Right Side */}
-          <div className="w-1/2 pl-12">
+          <div className="w-1/2 pl-12 relative z-20">
+            {/* Add top spacing to push content down and align with images */}
+            <div className="h-96"></div>
+            
             {projects.map((project, index) => (
               <div
                 key={project.id}
-                className="mb-96 last:mb-24"
+                className={`mb-96 ${index === projects.length - 1 ? 'mb-96' : ''}`}
               >
                 <div className={`transition-all duration-700 ${
                   index === activeProject 
@@ -145,6 +151,9 @@ const ProjectsSection = () => {
                 </div>
               </div>
             ))}
+            
+            {/* Add bottom spacing to ensure last project aligns properly */}
+            <div className="h-96"></div>
           </div>
         </div>
       </div>
