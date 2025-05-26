@@ -81,7 +81,7 @@ const ProjectsSection = () => {
         </div>
 
         {/* Main Content */}
-        <div className="flex items-start min-h-[200vh] relative">
+        <div className="flex items-start min-h-[200vh] relative mt-12">
           {/* Fixed Image Container - Left Side */}
           <div className="w-1/2 sticky top-1/2 transform -translate-y-1/2 pr-12">
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
