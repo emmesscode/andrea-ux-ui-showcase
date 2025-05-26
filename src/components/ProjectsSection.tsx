@@ -53,8 +53,8 @@ const ProjectsSection = () => {
         const sectionHeight = rect.height;
         const viewportHeight = window.innerHeight;
         
-        // Adjust for header offset and full-screen headline
-        const headerOffset = viewportHeight + 200; // Account for full-screen headline + header space
+        // Adjust for header offset and full-screen headline with increased spacing
+        const headerOffset = viewportHeight + 400; // Increased spacing between headline and projects
         
         if (sectionTop <= viewportHeight && sectionTop + sectionHeight >= 0) {
           const adjustedProgress = Math.max(0, Math.min(1, (viewportHeight - sectionTop - headerOffset) / (sectionHeight - headerOffset)));
@@ -83,6 +83,9 @@ const ProjectsSection = () => {
           </p>
         </div>
       </div>
+
+      {/* Additional spacing between headline and projects */}
+      <div className="h-48"></div>
 
       {/* Projects Section */}
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
