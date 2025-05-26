@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -96,6 +95,26 @@ export default {
 						transform: 'translateY(0)'
 					}
 				},
+				'fade-in-up': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(40px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
+				},
+				'fade-in-scale': {
+					'0%': {
+						opacity: '0',
+						transform: 'scale(0.95) translateY(20px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'scale(1) translateY(0)'
+					}
+				},
 				'float': {
 					'0%, 100%': {
 						transform: 'translateY(0px) rotate(0deg)'
@@ -113,14 +132,36 @@ export default {
 						opacity: '1',
 						transform: 'translateY(0)'
 					}
+				},
+				'parallax-slow': {
+					'0%': {
+						transform: 'translateY(0px)'
+					},
+					'100%': {
+						transform: 'translateY(-50px)'
+					}
+				},
+				'reveal-text': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(100%)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 0.6s ease-out',
+				'fade-in-up': 'fade-in-up 0.8s ease-out',
+				'fade-in-scale': 'fade-in-scale 0.8s ease-out',
 				'float': 'float 6s ease-in-out infinite',
-				'slide-up': 'slide-up 0.8s ease-out'
+				'slide-up': 'slide-up 0.8s ease-out',
+				'parallax-slow': 'parallax-slow 10s ease-out infinite',
+				'reveal-text': 'reveal-text 0.8s ease-out'
 			}
 		}
 	},
