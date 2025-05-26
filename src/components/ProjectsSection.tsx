@@ -53,8 +53,8 @@ const ProjectsSection = () => {
         const sectionHeight = rect.height;
         const viewportHeight = window.innerHeight;
         
-        // Adjust for header offset
-        const headerOffset = 200; // Account for header space
+        // Adjust for header offset and full-screen headline
+        const headerOffset = viewportHeight + 200; // Account for full-screen headline + header space
         
         if (sectionTop <= viewportHeight && sectionTop + sectionHeight >= 0) {
           const adjustedProgress = Math.max(0, Math.min(1, (viewportHeight - sectionTop - headerOffset) / (sectionHeight - headerOffset)));
@@ -72,17 +72,20 @@ const ProjectsSection = () => {
 
   return (
     <section id="projects" ref={sectionRef} className="relative bg-white">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Section Header - with proper spacing */}
-        <div className="text-center py-24 relative z-20">
-          <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-6 opacity-0 animate-[fade-in_1s_ease-out_0.2s_forwards]">
+      {/* Full-Screen Headline Section */}
+      <div className="h-screen flex items-center justify-center relative">
+        <div className="text-center max-w-5xl mx-auto px-6 lg:px-8">
+          <h2 className="text-6xl md:text-8xl lg:text-9xl font-light text-gray-900 mb-8 opacity-0 animate-[fade-in_1s_ease-out_0.2s_forwards] leading-tight">
             Selected Work
           </h2>
-          <p className="text-xl text-gray-600 font-light max-w-2xl mx-auto opacity-0 animate-[fade-in_1s_ease-out_0.4s_forwards]">
+          <p className="text-2xl md:text-3xl text-gray-600 font-light max-w-3xl mx-auto opacity-0 animate-[fade-in_1s_ease-out_0.4s_forwards] leading-relaxed">
             A collection of projects where design meets functionality, creating impactful user experiences
           </p>
         </div>
+      </div>
 
+      {/* Projects Section */}
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Main Content */}
         <div className="flex items-start relative" style={{ minHeight: `${100 + (projects.length * 100)}vh` }}>
           {/* Fixed Image Container - Left Side */}
