@@ -57,10 +57,22 @@ const ProjectsSection = () => {
         const headerOffset = viewportHeight + 400; // Increased spacing between headline and projects
         
         if (sectionTop <= viewportHeight && sectionTop + sectionHeight >= 0) {
-          const adjustedProgress = Math.max(0, Math.min(1, (viewportHeight - sectionTop - headerOffset) / (sectionHeight - headerOffset)));
-          const projectIndex = Math.floor(adjustedProgress * projects.length);
-          setActiveProject(Math.min(projectIndex, projects.length - 1));
-          setScrollY(adjustedProgress);
+          // Calculate progress through the scrollable projects area
+          const scrollableAreaStart = viewportHeight - sectionTop - headerOffset;
+          const scrollableAreaHeight = sectionHeight - headerOffset - viewportHeight;
+          const scrollProgress = Math.max(0, Math.min(1, scrollableAreaStart / scrollableAreaHeight));
+          
+          // Calculate which project should be active based on scroll position
+          // Each project takes up an equal portion of the scroll area
+          const projectProgress = scrollProgress * projects.length;
+          const projectIndex = Math.min(Math.floor(projectProgress), projects.length - 1);
+          
+          // For the last project, ensure it becomes active when its text is centered
+          // by adjusting the threshold slightly
+          const adjustedIndex = projectProgress >= projects.length - 0.5 ? projects.length - 1 : projectIndex;
+          
+          setActiveProject(adjustedIndex);
+          setScrollY(scrollProgress);
         }
       }
     };
