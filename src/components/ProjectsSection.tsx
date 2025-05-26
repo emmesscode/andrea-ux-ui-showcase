@@ -71,7 +71,7 @@ const ProjectsSection = () => {
     <section id="projects" ref={sectionRef} className="relative bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center py-24 mb-40">
+        <div className="text-center py-24">
           <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-6 opacity-0 animate-[fade-in_1s_ease-out_0.2s_forwards]">
             Selected Work
           </h2>
