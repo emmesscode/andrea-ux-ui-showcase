@@ -1,13 +1,12 @@
-
 import React from 'react';
-import { Heart, Linkedin, Twitter, Dribbble, Behance } from 'lucide-react';
+import { Heart, Linkedin, Twitter, Dribbble, Globe } from 'lucide-react';
 
 const Footer = () => {
   const socialLinks = [
     { icon: Linkedin, href: "#", label: "LinkedIn" },
     { icon: Twitter, href: "#", label: "Twitter" },
     { icon: Dribbble, href: "#", label: "Dribbble" },
-    { icon: Behance, href: "#", label: "Behance" }
+    { icon: Globe, href: "#", label: "Portfolio" }
   ];
 
   return (
