@@ -22,28 +22,30 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
 
   return (
     <div 
-      className={`group cursor-pointer animate-fade-in`}
+      className={`group cursor-pointer opacity-0 animate-[fade-in_0.8s_ease-out_forwards] hover:-translate-y-2 transition-all duration-500`}
       style={{ animationDelay: `${index * 200}ms` }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="relative overflow-hidden rounded-2xl mb-6 aspect-[4/3]">
+      <div className="relative overflow-hidden rounded-2xl mb-6 aspect-[4/3] shadow-lg hover:shadow-2xl transition-all duration-500">
         <img
           src={project.image}
           alt={project.title}
-          className={`w-full h-full object-cover transition-transform duration-700 ${
-            isHovered ? 'scale-110' : 'scale-100'
+          className={`w-full h-full object-cover transition-all duration-700 ${
+            isHovered ? 'scale-110 brightness-110' : 'scale-100 brightness-100'
           }`}
         />
-        <div className={`absolute inset-0 bg-black transition-opacity duration-300 ${
-          isHovered ? 'opacity-20' : 'opacity-0'
+        <div className={`absolute inset-0 bg-gradient-to-t from-black/30 to-transparent transition-opacity duration-500 ${
+          isHovered ? 'opacity-100' : 'opacity-0'
         }`} />
         
-        {/* Hover overlay */}
-        <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${
-          isHovered ? 'opacity-100' : 'opacity-0'
+        {/* Enhanced hover overlay */}
+        <div className={`absolute inset-0 flex items-center justify-center transition-all duration-500 ${
+          isHovered ? 'opacity-100 backdrop-blur-sm' : 'opacity-0'
         }`}>
-          <div className="bg-white rounded-full p-4 transform transition-transform duration-300 hover:scale-110">
+          <div className={`bg-white rounded-full p-4 shadow-xl transition-all duration-300 ${
+            isHovered ? 'scale-110 rotate-12' : 'scale-90 rotate-0'
+          }`}>
             <ExternalLink size={24} className="text-gray-900" />
           </div>
         </div>
@@ -51,13 +53,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
       
       <div className="space-y-4">
         <div>
-          <p className="text-sm text-gray-500 font-light uppercase tracking-wider mb-2">
+          <p className="text-sm text-gray-500 font-light uppercase tracking-wider mb-2 transition-colors duration-300 group-hover:text-gray-700">
             {project.category}
           </p>
-          <h3 className="text-2xl font-light text-gray-900 mb-3 group-hover:text-gray-700 transition-colors duration-200">
+          <h3 className="text-2xl font-light text-gray-900 mb-3 transition-all duration-300 group-hover:text-gray-700 group-hover:translate-x-1">
             {project.title}
           </h3>
-          <p className="text-gray-600 font-light leading-relaxed">
+          <p className="text-gray-600 font-light leading-relaxed transition-colors duration-300 group-hover:text-gray-800">
             {project.description}
           </p>
         </div>
@@ -66,7 +68,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
           {project.tags.map((tag, tagIndex) => (
             <span
               key={tagIndex}
-              className="px-3 py-1 bg-gray-100 text-gray-700 text-sm font-light rounded-full"
+              className="px-3 py-1 bg-gray-100 text-gray-700 text-sm font-light rounded-full transition-all duration-300 hover:bg-gray-200 hover:scale-105"
+              style={{ 
+                animationDelay: `${(index * 200) + (tagIndex * 100)}ms`,
+                animation: 'fade-in 0.6s ease-out forwards'
+              }}
             >
               {tag}
             </span>

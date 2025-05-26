@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 
@@ -10,6 +10,25 @@ const ContactSection = () => {
     subject: '',
     message: ''
   });
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -49,9 +68,11 @@ const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" className="py-24 bg-white">
+    <section id="contact" className="py-24 bg-white" ref={sectionRef}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <div className={`text-center mb-16 transition-all duration-1000 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}>
           <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-6">
             Let's Work Together
           </h2>
@@ -61,7 +82,9 @@ const ContactSection = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          <div className="space-y-8">
+          <div className={`space-y-8 transition-all duration-1000 delay-200 ${
+            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+          }`}>
             <div>
               <h3 className="text-2xl font-light text-gray-900 mb-6">Get in Touch</h3>
               <p className="text-gray-600 font-light leading-relaxed mb-8">
@@ -75,21 +98,27 @@ const ContactSection = () => {
                 <a
                   key={index}
                   href={info.link}
-                  className="flex items-center space-x-4 p-4 rounded-xl hover:bg-gray-50 transition-colors duration-200 group"
+                  className="flex items-center space-x-4 p-4 rounded-xl hover:bg-gray-50 transition-all duration-300 group hover:-translate-y-1 hover:shadow-md"
+                  style={{ 
+                    animation: `fade-in 0.8s ease-out ${0.4 + (index * 0.1)}s forwards`,
+                    opacity: 0
+                  }}
                 >
-                  <div className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full group-hover:bg-gray-200 transition-colors duration-200">
+                  <div className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-full group-hover:bg-gray-200 group-hover:scale-110 transition-all duration-300">
                     <info.icon size={20} className="text-gray-700" />
                   </div>
                   <div>
                     <div className="text-sm text-gray-500 font-light">{info.label}</div>
-                    <div className="text-gray-900 font-light">{info.value}</div>
+                    <div className="text-gray-900 font-light group-hover:text-gray-700 transition-colors duration-300">{info.value}</div>
                   </div>
                 </a>
               ))}
             </div>
           </div>
 
-          <div className="bg-gray-50 rounded-2xl p-8">
+          <div className={`bg-gray-50 rounded-2xl p-8 hover:shadow-xl transition-all duration-500 ${
+            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+          }`} style={{ transitionDelay: '400ms' }}>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -103,7 +132,7 @@ const ContactSection = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-transparent transition-all duration-200"
+                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-transparent transition-all duration-300 hover:border-gray-300 focus:scale-105"
                     placeholder="Your name"
                   />
                 </div>
@@ -118,7 +147,7 @@ const ContactSection = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-transparent transition-all duration-200"
+                    className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-transparent transition-all duration-300 hover:border-gray-300 focus:scale-105"
                     placeholder="your@email.com"
                   />
                 </div>
@@ -135,7 +164,7 @@ const ContactSection = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-transparent transition-all duration-200"
+                  className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-transparent transition-all duration-300 hover:border-gray-300 focus:scale-105"
                   placeholder="Project inquiry"
                 />
               </div>
@@ -151,17 +180,17 @@ const ContactSection = () => {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-transparent transition-all duration-200 resize-none"
+                  className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-300 focus:border-transparent transition-all duration-300 resize-none hover:border-gray-300 focus:scale-105"
                   placeholder="Tell me about your project..."
                 />
               </div>
               
               <button
                 type="submit"
-                className="w-full flex items-center justify-center space-x-2 bg-gray-900 text-white py-3 px-6 rounded-xl hover:bg-gray-800 transition-colors duration-200 font-light"
+                className="w-full flex items-center justify-center space-x-2 bg-gray-900 text-white py-3 px-6 rounded-xl hover:bg-gray-800 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 font-light group"
               >
                 <span>Send Message</span>
-                <Send size={18} />
+                <Send size={18} className="group-hover:translate-x-1 transition-transform duration-300" />
               </button>
             </form>
           </div>
