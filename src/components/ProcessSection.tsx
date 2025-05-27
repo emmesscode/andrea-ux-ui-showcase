@@ -1,9 +1,10 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { Search, Lightbulb, Hammer, TestTube } from 'lucide-react';
 
 const ProcessSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeSteps, setActiveSteps] = useState<number[]>([]);
 
   const processSteps = [
     {
@@ -48,28 +49,31 @@ const ProcessSection = () => {
         const sectionHeight = rect.height;
         const viewportHeight = window.innerHeight;
         
+        // Check if section is in viewport
         if (sectionTop <= viewportHeight && sectionTop + sectionHeight >= 0) {
-          // Calculate how much of the section has been scrolled through
-          // When section top is at viewport height, progress = 0
-          // When section bottom reaches viewport top, progress = 1
-          const scrollableDistance = sectionHeight + viewportHeight;
-          const scrolled = viewportHeight - sectionTop;
-          const scrollProgress = Math.max(0, Math.min(1, scrolled / scrollableDistance));
+          // Calculate when section hits bottom 66% of viewport (33% from top)
+          const triggerPoint = viewportHeight * 0.33;
           
-          // More evenly distributed thresholds for 4 steps
-          // Each step gets roughly equal scroll distance
-          const stepThresholds = [0.0, 0.25, 0.5, 0.75];
-          let stepIndex = 0;
-          
-          // Find the highest threshold that has been passed
-          for (let i = stepThresholds.length - 1; i >= 0; i--) {
-            if (scrollProgress >= stepThresholds[i]) {
-              stepIndex = i;
-              break;
+          if (sectionTop <= triggerPoint) {
+            // Section has hit the bottom 66% of viewport
+            // Calculate progress through the section
+            const scrollableDistance = sectionHeight + triggerPoint;
+            const scrolled = triggerPoint - sectionTop;
+            const scrollProgress = Math.max(0, Math.min(1, scrolled / scrollableDistance));
+            
+            if (scrollProgress < 0.5) {
+              // First half: show steps 1 and 2
+              setActiveSteps([0, 1]);
+            } else {
+              // Second half: show steps 3 and 4
+              setActiveSteps([2, 3]);
             }
+          } else {
+            // Section hasn't hit the trigger point yet
+            setActiveSteps([]);
           }
-          
-          setActiveStep(stepIndex);
+        } else {
+          setActiveSteps([]);
         }
       }
     };
@@ -96,7 +100,7 @@ const ProcessSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
           {processSteps.map((step, index) => {
             const Icon = step.icon;
-            const isActive = index === activeStep;
+            const isActive = activeSteps.includes(index);
             
             return (
               <div
