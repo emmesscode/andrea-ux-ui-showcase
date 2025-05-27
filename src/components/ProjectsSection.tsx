@@ -96,18 +96,14 @@ const ProjectsSection = () => {
         const headerOffset = viewportHeight + 192; // 192px = 48 * 4 (h-48 spacing)
         
         if (sectionTop <= viewportHeight && sectionTop + sectionHeight >= 0) {
-          // Start calculating progress only after the header section
-          const effectiveSectionStart = Math.max(0, headerOffset - sectionTop);
-          const effectiveSectionHeight = sectionHeight - headerOffset;
+          // Calculate scroll progress within the projects area
+          const scrollIntoSection = Math.max(0, viewportHeight - sectionTop - headerOffset);
+          const totalScrollableHeight = sectionHeight - headerOffset - viewportHeight;
+          const scrollProgress = Math.max(0, Math.min(1, scrollIntoSection / totalScrollableHeight));
           
-          // Calculate scroll progress through the projects area only
-          const scrollProgress = Math.max(0, Math.min(1, (viewportHeight / 2 - sectionTop + effectiveSectionStart) / effectiveSectionHeight));
-          
-          // Calculate which project should be active
-          // Increase delay significantly so image changes only when text is well into viewport
-          const adjustedProgress = Math.max(0, scrollProgress - 0.4); // Delay by 40% of scroll
-          const projectProgress = adjustedProgress * projects.length;
-          const projectIndex = Math.max(0, Math.min(Math.floor(projectProgress), projects.length - 1));
+          // Calculate which project should be active based on scroll position
+          // Each project takes up equal space in the scroll area
+          const projectIndex = Math.max(0, Math.min(Math.floor(scrollProgress * projects.length), projects.length - 1));
           
           setActiveProject(projectIndex);
           setScrollY(scrollProgress);
@@ -239,7 +235,6 @@ const ProjectsSection = () => {
                     </div>
                   </div>
                   
-                  {/* ... keep existing code (tags and button) the same ... */}
                   <div className="flex flex-wrap gap-3 mb-8">
                     {project.tags.map((tag, tagIndex) => (
                       <span
