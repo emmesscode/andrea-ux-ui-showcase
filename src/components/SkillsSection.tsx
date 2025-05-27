@@ -127,9 +127,13 @@ const SkillsSection = () => {
                   <h4 className="text-lg font-light text-gray-900 mb-2 group-hover:scale-105 transition-transform duration-300">
                     {skill.name}
                   </h4>
-                  <ThemedButton variant="ghost" size="sm" className="text-xs">
+                  <div className={`px-3 py-1 text-xs font-light rounded-full transition-all duration-300 ${
+                    isColorTheme 
+                      ? 'bg-white bg-gradient-to-r from-[#bcbc82] to-[#C9AF94] bg-clip-text text-transparent border border-gray-200'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}>
                     {skill.category}
-                  </ThemedButton>
+                  </div>
                 </div>
               </div>
             ))}
@@ -145,11 +149,13 @@ const SkillsSection = () => {
           </h3>
           <div className="flex flex-wrap justify-center gap-4 max-w-5xl mx-auto">
             {tools.map((tool, index) => (
-              <ThemedButton
+              <div
                 key={index}
-                variant="outline"
-                size="sm"
-                className={`transition-all duration-500 transform hover:-translate-y-1 hover:scale-105 ${
+                className={`px-4 py-2 text-sm font-light rounded-full transition-all duration-500 transform hover:-translate-y-1 hover:scale-105 ${
+                  isColorTheme 
+                    ? 'bg-white bg-gradient-to-r from-[#bcbc82] to-[#C9AF94] bg-clip-text text-transparent border border-gray-200 hover:shadow-md'
+                    : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50 hover:shadow-sm'
+                } ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                 }`}
                 style={{ 
@@ -158,10 +164,10 @@ const SkillsSection = () => {
                 }}
               >
                 {tool.name}
-              </ThemedButton>
+              </div>
             ))}
           </div>
-        </div>
+        </</div>
       </div>
     </section>
   );
