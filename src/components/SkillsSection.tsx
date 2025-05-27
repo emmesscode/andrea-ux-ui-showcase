@@ -83,19 +83,16 @@ const SkillsSection = () => {
                   animation: isVisible ? `fade-in 0.8s ease-out ${skill.delay} forwards` : 'none'
                 }}
               >
-                {/* Floating animation wrapper */}
-                <div className="animate-float" style={{ animationDelay: skill.delay }}>
-                  <div className="flex flex-col items-center text-center">
-                    <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-gray-200 group-hover:scale-110 transition-all duration-300">
-                      <skill.icon size={24} className="text-gray-700 group-hover:scale-110 transition-transform duration-300" />
-                    </div>
-                    <h4 className="text-lg font-light text-gray-900 mb-2 group-hover:scale-105 transition-transform duration-300">
-                      {skill.name}
-                    </h4>
-                    <span className="text-sm text-gray-500 px-3 py-1 bg-gray-50 rounded-full">
-                      {skill.category}
-                    </span>
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-gray-200 group-hover:scale-110 transition-all duration-300">
+                    <skill.icon size={24} className="text-gray-700 group-hover:scale-110 transition-transform duration-300" />
                   </div>
+                  <h4 className="text-lg font-light text-gray-900 mb-2 group-hover:scale-105 transition-transform duration-300">
+                    {skill.name}
+                  </h4>
+                  <span className="text-sm text-gray-500 px-3 py-1 bg-gray-50 rounded-full">
+                    {skill.category}
+                  </span>
                 </div>
               </div>
             ))}
@@ -121,19 +118,10 @@ const SkillsSection = () => {
                   animation: isVisible ? `fade-in 0.8s ease-out ${tool.delay} forwards` : 'none'
                 }}
               >
-                {/* Subtle floating animation */}
-                <div 
-                  className="animate-float"
-                  style={{ 
-                    animationDelay: tool.delay,
-                    animationDuration: `${6 + (index % 3)}s` // Varying duration for organic feel
-                  }}
-                >
-                  <span className="text-gray-700 font-light group-hover:text-gray-900 transition-colors duration-300">
-                    {tool.name}
-                  </span>
-                  <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gray-300 group-hover:w-full transition-all duration-300"></div>
-                </div>
+                <span className="text-gray-700 font-light group-hover:text-gray-900 transition-colors duration-300">
+                  {tool.name}
+                </span>
+                <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gray-300 group-hover:w-full transition-all duration-300"></div>
               </div>
             ))}
           </div>
