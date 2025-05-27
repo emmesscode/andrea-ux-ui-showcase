@@ -104,8 +104,8 @@ const ProjectsSection = () => {
           const scrollProgress = Math.max(0, Math.min(1, (viewportHeight / 2 - sectionTop + effectiveSectionStart) / effectiveSectionHeight));
           
           // Calculate which project should be active
-          // Add a larger delay factor to make transitions happen later when text is properly centered
-          const adjustedProgress = Math.max(0, scrollProgress - 0.25); // Delay by 25% of scroll
+          // Increase delay significantly so image changes only when text is well into viewport
+          const adjustedProgress = Math.max(0, scrollProgress - 0.4); // Delay by 40% of scroll
           const projectProgress = adjustedProgress * projects.length;
           const projectIndex = Math.max(0, Math.min(Math.floor(projectProgress), projects.length - 1));
           
