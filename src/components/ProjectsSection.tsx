@@ -1,9 +1,12 @@
+
 import React, { useEffect, useRef, useState } from 'react';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const ProjectsSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [activeProject, setActiveProject] = useState(0);
   const [scrollY, setScrollY] = useState(0);
+  const { isColorTheme } = useTheme();
 
   const projects = [
     {
@@ -175,7 +178,11 @@ const ProjectsSection = () => {
                     ? 'opacity-100 transform translate-y-0' 
                     : 'opacity-40 transform translate-y-8'
                 }`}>
-                  <p className="text-sm text-gray-500 font-light uppercase tracking-wider mb-4">
+                  <p className={`text-sm font-light uppercase tracking-wider mb-4 ${
+                    isColorTheme 
+                      ? 'bg-gradient-to-r from-[#bcbc82] to-[#C9AF94] bg-clip-text text-transparent'
+                      : 'text-gray-500'
+                  }`}>
                     {project.category}
                   </p>
                   <h3 className="text-4xl md:text-5xl font-light text-gray-900 mb-6 leading-tight">
@@ -189,7 +196,11 @@ const ProjectsSection = () => {
                   <div className="space-y-8 mb-8">
                     {/* Problem */}
                     <div>
-                      <h4 className="text-sm font-medium text-gray-900 uppercase tracking-wider mb-3">Challenge</h4>
+                      <h4 className={`text-sm font-medium uppercase tracking-wider mb-3 ${
+                        isColorTheme 
+                          ? 'bg-gradient-to-r from-[#bcbc82] to-[#C9AF94] bg-clip-text text-transparent'
+                          : 'text-gray-900'
+                      }`}>Challenge</h4>
                       <p className="text-gray-600 font-light leading-relaxed">
                         {project.problem}
                       </p>
@@ -197,7 +208,11 @@ const ProjectsSection = () => {
 
                     {/* Solution */}
                     <div>
-                      <h4 className="text-sm font-medium text-gray-900 uppercase tracking-wider mb-3">Solution</h4>
+                      <h4 className={`text-sm font-medium uppercase tracking-wider mb-3 ${
+                        isColorTheme 
+                          ? 'bg-gradient-to-r from-[#bcbc82] to-[#C9AF94] bg-clip-text text-transparent'
+                          : 'text-gray-900'
+                      }`}>Solution</h4>
                       <p className="text-gray-600 font-light leading-relaxed">
                         {project.solution}
                       </p>
@@ -205,11 +220,23 @@ const ProjectsSection = () => {
 
                     {/* Key Metrics */}
                     <div>
-                      <h4 className="text-sm font-medium text-gray-900 uppercase tracking-wider mb-4">Impact</h4>
+                      <h4 className={`text-sm font-medium uppercase tracking-wider mb-4 ${
+                        isColorTheme 
+                          ? 'bg-gradient-to-r from-[#bcbc82] to-[#C9AF94] bg-clip-text text-transparent'
+                          : 'text-gray-900'
+                      }`}>Impact</h4>
                       <div className="grid grid-cols-2 gap-4 mb-4">
                         {project.metrics.map((metric, metricIndex) => (
-                          <div key={metricIndex} className="text-center p-4 bg-gray-50 rounded-lg">
-                            <div className="text-2xl font-light text-gray-900 mb-1">{metric.value}</div>
+                          <div key={metricIndex} className={`text-center p-4 rounded-lg ${
+                            isColorTheme 
+                              ? 'bg-gradient-to-r from-[#bcbc82]/10 to-[#C9AF94]/10 border border-[#bcbc82]/20'
+                              : 'bg-gray-50'
+                          }`}>
+                            <div className={`text-2xl font-light mb-1 ${
+                              isColorTheme 
+                                ? 'bg-gradient-to-r from-[#bcbc82] to-[#C9AF94] bg-clip-text text-transparent'
+                                : 'text-gray-900'
+                            }`}>{metric.value}</div>
                             <div className="text-xs text-gray-600 uppercase tracking-wider">{metric.label}</div>
                           </div>
                         ))}
@@ -221,12 +248,20 @@ const ProjectsSection = () => {
 
                     {/* Process */}
                     <div>
-                      <h4 className="text-sm font-medium text-gray-900 uppercase tracking-wider mb-3">Process</h4>
+                      <h4 className={`text-sm font-medium uppercase tracking-wider mb-3 ${
+                        isColorTheme 
+                          ? 'bg-gradient-to-r from-[#bcbc82] to-[#C9AF94] bg-clip-text text-transparent'
+                          : 'text-gray-900'
+                      }`}>Process</h4>
                       <div className="flex flex-wrap gap-2">
                         {project.process.map((step, stepIndex) => (
                           <span
                             key={stepIndex}
-                            className="px-3 py-1 bg-gray-900 text-white text-xs font-light rounded-full"
+                            className={`px-3 py-1 text-xs font-light rounded-full ${
+                              isColorTheme 
+                                ? 'bg-gradient-to-r from-[#bcbc82] to-[#C9AF94] text-white'
+                                : 'bg-gray-900 text-white'
+                            }`}
                           >
                             {step}
                           </span>
@@ -239,16 +274,28 @@ const ProjectsSection = () => {
                     {project.tags.map((tag, tagIndex) => (
                       <span
                         key={tagIndex}
-                        className="px-4 py-2 bg-gray-100 text-gray-700 text-sm font-light rounded-full transition-all duration-300 hover:bg-gray-200"
+                        className={`px-4 py-2 text-sm font-light rounded-full transition-all duration-300 ${
+                          isColorTheme 
+                            ? 'bg-gradient-to-r from-[#bcbc82] to-[#C9AF94] text-white hover:shadow-md'
+                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        }`}
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
 
-                  <button className="inline-flex items-center space-x-2 text-gray-700 hover:text-gray-900 transition-all duration-300 group">
+                  <button className={`inline-flex items-center space-x-2 transition-all duration-300 group ${
+                    isColorTheme 
+                      ? 'text-gray-700 hover:bg-gradient-to-r hover:from-[#bcbc82] hover:to-[#C9AF94] hover:bg-clip-text hover:text-transparent'
+                      : 'text-gray-700 hover:text-gray-900'
+                  }`}>
                     <span className="font-light">View Project</span>
-                    <div className="w-8 h-0.5 bg-gray-400 group-hover:bg-gray-900 transition-all duration-300 group-hover:w-12"></div>
+                    <div className={`w-8 h-0.5 transition-all duration-300 group-hover:w-12 ${
+                      isColorTheme 
+                        ? 'bg-gradient-to-r from-[#bcbc82] to-[#C9AF94]'
+                        : 'bg-gray-400 group-hover:bg-gray-900'
+                    }`}></div>
                   </button>
                 </div>
               </div>
