@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { Search, Lightbulb, Hammer, TestTube } from 'lucide-react';
 
@@ -50,23 +49,25 @@ const ProcessSection = () => {
         const viewportHeight = window.innerHeight;
         
         if (sectionTop <= viewportHeight && sectionTop + sectionHeight >= 0) {
-          // Calculate progress through the section with better boundaries
-          const sectionStart = Math.max(0, viewportHeight - sectionTop);
-          const sectionEnd = sectionHeight + viewportHeight;
-          const scrollProgress = Math.max(0, Math.min(1, sectionStart / sectionEnd));
+          // Calculate how much of the section has been scrolled through
+          // When section top is at viewport height, progress = 0
+          // When section bottom reaches viewport top, progress = 1
+          const scrollableDistance = sectionHeight + viewportHeight;
+          const scrolled = viewportHeight - sectionTop;
+          const scrollProgress = Math.max(0, Math.min(1, scrolled / scrollableDistance));
           
-          // Determine active step with adjusted thresholds for more accurate timing
-          const stepThresholds = [0.1, 0.35, 0.65, 0.85]; // More precise thresholds
+          // More evenly distributed thresholds for 4 steps
+          // Each step gets roughly equal scroll distance
+          const stepThresholds = [0.0, 0.25, 0.5, 0.75];
           let stepIndex = 0;
           
-          for (let i = 0; i < stepThresholds.length; i++) {
+          // Find the highest threshold that has been passed
+          for (let i = stepThresholds.length - 1; i >= 0; i--) {
             if (scrollProgress >= stepThresholds[i]) {
               stepIndex = i;
+              break;
             }
           }
-          
-          // Ensure we don't exceed array bounds
-          stepIndex = Math.min(stepIndex, processSteps.length - 1);
           
           setActiveStep(stepIndex);
         }
@@ -76,7 +77,7 @@ const ProcessSection = () => {
     window.addEventListener('scroll', handleScroll);
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [processSteps.length]);
+  }, []);
 
   return (
     <section id="process" ref={sectionRef} className="relative bg-gray-50 py-32">
