@@ -50,12 +50,23 @@ const ProcessSection = () => {
         const viewportHeight = window.innerHeight;
         
         if (sectionTop <= viewportHeight && sectionTop + sectionHeight >= 0) {
-          // Calculate progress through the section
-          const scrollProgress = Math.max(0, Math.min(1, (viewportHeight - sectionTop) / (sectionHeight + viewportHeight)));
+          // Calculate progress through the section with better boundaries
+          const sectionStart = Math.max(0, viewportHeight - sectionTop);
+          const sectionEnd = sectionHeight + viewportHeight;
+          const scrollProgress = Math.max(0, Math.min(1, sectionStart / sectionEnd));
           
-          // Determine active step based on scroll progress
-          const stepProgress = scrollProgress * processSteps.length;
-          const stepIndex = Math.min(Math.floor(stepProgress), processSteps.length - 1);
+          // Determine active step with adjusted thresholds for more accurate timing
+          const stepThresholds = [0.1, 0.35, 0.65, 0.85]; // More precise thresholds
+          let stepIndex = 0;
+          
+          for (let i = 0; i < stepThresholds.length; i++) {
+            if (scrollProgress >= stepThresholds[i]) {
+              stepIndex = i;
+            }
+          }
+          
+          // Ensure we don't exceed array bounds
+          stepIndex = Math.min(stepIndex, processSteps.length - 1);
           
           setActiveStep(stepIndex);
         }
