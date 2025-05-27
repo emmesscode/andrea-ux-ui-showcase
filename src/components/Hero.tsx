@@ -32,7 +32,7 @@ const Hero = () => {
           }}
         >
           <h1 className={`text-5xl md:text-7xl font-light mb-6 tracking-tight opacity-0 animate-[fade-in_1s_ease-out_0.2s_forwards] ${
-            isColorTheme ? 'bg-gradient-to-r from-primary via-slate-600 to-gray-700 bg-clip-text text-transparent' : 'text-gray-900'
+            isColorTheme ? 'bg-gradient-to-r from-[#bcbc82] via-[#a8a876] to-[#8b8b5c] bg-clip-text text-transparent' : 'text-gray-900'
           }`}>
             Andrea
           </h1>
