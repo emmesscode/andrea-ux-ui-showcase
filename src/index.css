@@ -43,6 +43,22 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Color theme variables */
+    --theme-accent: 60 15% 62%;
+    --theme-accent-foreground: 0 0% 100%;
+    --theme-pastel-blue: 200 30% 90%;
+    --theme-pastel-green: 120 30% 90%;
+    --theme-pastel-pink: 340 30% 90%;
+    --theme-pastel-yellow: 60 30% 90%;
+    --theme-pastel-purple: 280 30% 90%;
+  }
+
+  .color-theme {
+    --primary: var(--theme-accent);
+    --primary-foreground: var(--theme-accent-foreground);
+    --accent: var(--theme-accent);
+    --accent-foreground: var(--theme-accent-foreground);
   }
 
   .dark {
@@ -105,5 +121,25 @@
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  
+  .theme-pastel-blue {
+    background-color: hsl(var(--theme-pastel-blue));
+  }
+  
+  .theme-pastel-green {
+    background-color: hsl(var(--theme-pastel-green));
+  }
+  
+  .theme-pastel-pink {
+    background-color: hsl(var(--theme-pastel-pink));
+  }
+  
+  .theme-pastel-yellow {
+    background-color: hsl(var(--theme-pastel-yellow));
+  }
+  
+  .theme-pastel-purple {
+    background-color: hsl(var(--theme-pastel-purple));
   }
 }

@@ -1,11 +1,13 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { Palette, Code, Database, Figma, Zap, Users, Lightbulb, Settings } from 'lucide-react';
+import { ThemedButton } from '@/components/ui/themed-button';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const SkillsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const sectionRef = useRef<HTMLDivElement>(null);
+  const { isColorTheme } = useTheme();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -43,14 +45,14 @@ const SkillsSection = () => {
   }, []);
 
   const skills = [
-    { name: "User Experience Design", icon: Users, category: "Design", delay: "0s" },
-    { name: "User Interface Design", icon: Palette, category: "Design", delay: "0.5s" },
-    { name: "Prototyping", icon: Zap, category: "Design", delay: "1s" },
-    { name: "Design Systems", icon: Settings, category: "Design", delay: "1.5s" },
-    { name: "User Research", icon: Lightbulb, category: "Research", delay: "2s" },
-    { name: "Figma", icon: Figma, category: "Tools", delay: "0.2s" },
-    { name: "React & CSS", icon: Code, category: "Development", delay: "0.7s" },
-    { name: "Adobe Creative Suite", icon: Database, category: "Tools", delay: "1.2s" },
+    { name: "User Experience Design", icon: Users, category: "Design", delay: "0s", color: "theme-pastel-blue" },
+    { name: "User Interface Design", icon: Palette, category: "Design", delay: "0.5s", color: "theme-pastel-pink" },
+    { name: "Prototyping", icon: Zap, category: "Design", delay: "1s", color: "theme-pastel-yellow" },
+    { name: "Design Systems", icon: Settings, category: "Design", delay: "1.5s", color: "theme-pastel-green" },
+    { name: "User Research", icon: Lightbulb, category: "Research", delay: "2s", color: "theme-pastel-purple" },
+    { name: "Figma", icon: Figma, category: "Tools", delay: "0.2s", color: "theme-pastel-blue" },
+    { name: "React & CSS", icon: Code, category: "Development", delay: "0.7s", color: "theme-pastel-pink" },
+    { name: "Adobe Creative Suite", icon: Database, category: "Tools", delay: "1.2s", color: "theme-pastel-yellow" },
   ];
 
   const tools = [
@@ -115,15 +117,15 @@ const SkillsSection = () => {
                 }}
               >
                 <div className="flex flex-col items-center text-center">
-                  <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4 group-hover:bg-gray-200 group-hover:scale-110 transition-all duration-300">
+                  <div className={`w-16 h-16 ${isColorTheme ? skill.color : 'bg-gray-100'} rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-all duration-300`}>
                     <skill.icon size={24} className="text-gray-700 group-hover:scale-110 transition-transform duration-300" />
                   </div>
                   <h4 className="text-lg font-light text-gray-900 mb-2 group-hover:scale-105 transition-transform duration-300">
                     {skill.name}
                   </h4>
-                  <span className="text-sm text-gray-500 px-3 py-1 bg-gray-50 rounded-full">
+                  <ThemedButton variant="ghost" size="sm" className="text-xs">
                     {skill.category}
-                  </span>
+                  </ThemedButton>
                 </div>
               </div>
             ))}
@@ -139,9 +141,11 @@ const SkillsSection = () => {
           </h3>
           <div className="flex flex-wrap justify-center gap-4 max-w-5xl mx-auto">
             {tools.map((tool, index) => (
-              <div
+              <ThemedButton
                 key={index}
-                className={`group relative px-6 py-3 bg-white rounded-full shadow-sm hover:shadow-lg transition-all duration-500 transform hover:-translate-y-1 hover:scale-105 ${
+                variant="outline"
+                size="sm"
+                className={`transition-all duration-500 transform hover:-translate-y-1 hover:scale-105 ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                 }`}
                 style={{ 
@@ -149,11 +153,8 @@ const SkillsSection = () => {
                   animation: isVisible ? `fade-in 0.8s ease-out ${tool.delay} forwards` : 'none'
                 }}
               >
-                <span className="text-gray-700 font-light group-hover:text-gray-900 transition-colors duration-300">
-                  {tool.name}
-                </span>
-                <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gray-300 group-hover:w-full transition-all duration-300"></div>
-              </div>
+                {tool.name}
+              </ThemedButton>
             ))}
           </div>
         </div>

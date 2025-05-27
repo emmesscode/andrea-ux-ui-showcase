@@ -1,7 +1,7 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
+import { ThemedButton } from '@/components/ui/themed-button';
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -185,13 +185,14 @@ const ContactSection = () => {
                 />
               </div>
               
-              <button
+              <ThemedButton
                 type="submit"
-                className="w-full flex items-center justify-center space-x-2 bg-gray-900 text-white py-3 px-6 rounded-xl hover:bg-gray-800 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 font-light group"
+                variant="primary"
+                className="w-full flex items-center justify-center space-x-2 group"
               >
                 <span>Send Message</span>
                 <Send size={18} className="group-hover:translate-x-1 transition-transform duration-300" />
-              </button>
+              </ThemedButton>
             </form>
           </div>
         </div>
