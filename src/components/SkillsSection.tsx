@@ -68,25 +68,15 @@ const SkillsSection = () => {
 
   return (
     <section id="skills" className="py-24 bg-gray-50 overflow-hidden relative" ref={sectionRef}>
-      {/* Mouse-following pattern */}
-      <div 
-        className="absolute inset-0 pointer-events-none opacity-20 transition-all duration-300 ease-out"
-        style={{
-          background: `radial-gradient(circle 15px at ${mousePosition.x}px ${mousePosition.y}px, 
-            rgba(0, 0, 0, 0.15) 0%, 
-            rgba(0, 0, 0, 0.05) 70%, 
-            transparent 100%)`
-        }}
-      />
-      
-      {/* Visible dot pattern overlay that follows mouse */}
+      {/* Scaled dot pattern overlay that follows mouse */}
       <div 
         className="absolute inset-0 pointer-events-none opacity-30 transition-all duration-500 ease-out"
         style={{
           backgroundImage: `radial-gradient(circle at 2px 2px, rgba(0,0,0,0.15) 2px, transparent 0)`,
           backgroundSize: '40px 40px',
           backgroundPosition: `${mousePosition.x * 0.1}px ${mousePosition.y * 0.1}px`,
-          transform: `scale(${1 + Math.min(Math.sqrt(mousePosition.x * mousePosition.x + mousePosition.y * mousePosition.y) / 3000, 0.03)})`
+          transform: `scale(${1 + Math.min(Math.sqrt((mousePosition.x - 0) * (mousePosition.x - 0) + (mousePosition.y - 0) * (mousePosition.y - 0)) / 2000, 0.2)})`,
+          transformOrigin: `${mousePosition.x}px ${mousePosition.y}px`
         }}
       />
 
