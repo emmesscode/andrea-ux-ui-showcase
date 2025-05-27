@@ -72,16 +72,16 @@ const SkillsSection = () => {
       <div 
         className="absolute inset-0 pointer-events-none opacity-20 transition-all duration-300 ease-out"
         style={{
-          background: `radial-gradient(circle 200px at ${mousePosition.x}px ${mousePosition.y}px, 
-            rgba(0, 0, 0, 0.08) 0%, 
-            rgba(0, 0, 0, 0.03) 30%, 
-            transparent 70%)`
+          background: `radial-gradient(circle 15px at ${mousePosition.x}px ${mousePosition.y}px, 
+            rgba(0, 0, 0, 0.15) 0%, 
+            rgba(0, 0, 0, 0.05) 70%, 
+            transparent 100%)`
         }}
       />
       
       {/* Visible dot pattern overlay that follows mouse */}
       <div 
-        className="absolute inset-0 pointer-events-none opacity-60 transition-all duration-500 ease-out"
+        className="absolute inset-0 pointer-events-none opacity-30 transition-all duration-500 ease-out"
         style={{
           backgroundImage: `radial-gradient(circle at 2px 2px, rgba(0,0,0,0.15) 2px, transparent 0)`,
           backgroundSize: '40px 40px',
