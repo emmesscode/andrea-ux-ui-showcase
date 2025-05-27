@@ -92,25 +92,24 @@ const ProjectsSection = () => {
         const sectionHeight = rect.height;
         const viewportHeight = window.innerHeight;
         
-        // Adjust for header offset and full-screen headline with increased spacing
-        const headerOffset = viewportHeight + 400; // Increased spacing between headline and projects
+        // Account for the full-screen headline (viewportHeight + spacing)
+        const headerOffset = viewportHeight + 192; // 192px = 48 * 4 (h-48 spacing)
         
         if (sectionTop <= viewportHeight && sectionTop + sectionHeight >= 0) {
-          // Calculate progress through the scrollable projects area
-          const scrollableAreaStart = viewportHeight - sectionTop - headerOffset;
-          const scrollableAreaHeight = sectionHeight - headerOffset - viewportHeight;
-          const scrollProgress = Math.max(0, Math.min(1, scrollableAreaStart / scrollableAreaHeight));
+          // Start calculating progress only after the header section
+          const effectiveSectionStart = Math.max(0, headerOffset - sectionTop);
+          const effectiveSectionHeight = sectionHeight - headerOffset;
           
-          // Calculate which project should be active based on scroll position
-          // Each project takes up an equal portion of the scroll area
-          const projectProgress = scrollProgress * projects.length;
-          const projectIndex = Math.min(Math.floor(projectProgress), projects.length - 1);
+          // Calculate scroll progress through the projects area only
+          const scrollProgress = Math.max(0, Math.min(1, (viewportHeight / 2 - sectionTop + effectiveSectionStart) / effectiveSectionHeight));
           
-          // For the last project, ensure it becomes active when its text is centered
-          // by adjusting the threshold slightly
-          const adjustedIndex = projectProgress >= projects.length - 0.5 ? projects.length - 1 : projectIndex;
+          // Calculate which project should be active
+          // Add a delay factor to make transitions happen when text is better positioned
+          const adjustedProgress = Math.max(0, scrollProgress - 0.1); // Delay by 10% of scroll
+          const projectProgress = adjustedProgress * projects.length;
+          const projectIndex = Math.max(0, Math.min(Math.floor(projectProgress), projects.length - 1));
           
-          setActiveProject(adjustedIndex);
+          setActiveProject(projectIndex);
           setScrollY(scrollProgress);
         }
       }
