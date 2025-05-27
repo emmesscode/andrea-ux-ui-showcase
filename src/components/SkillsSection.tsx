@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { Palette, Code, Database, Figma, Zap, Users, Lightbulb, Settings } from 'lucide-react';
 
@@ -78,13 +79,14 @@ const SkillsSection = () => {
         }}
       />
       
-      {/* Subtle dot pattern overlay */}
+      {/* Visible dot pattern overlay that follows mouse */}
       <div 
-        className="absolute inset-0 pointer-events-none opacity-30 transition-all duration-500 ease-out"
+        className="absolute inset-0 pointer-events-none opacity-60 transition-all duration-500 ease-out"
         style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, rgba(0,0,0,0.1) 1px, transparent 0)`,
-          backgroundSize: '30px 30px',
-          transform: `scale(${1 + Math.min(Math.sqrt(mousePosition.x * mousePosition.x + mousePosition.y * mousePosition.y) / 2000, 0.05)})`
+          backgroundImage: `radial-gradient(circle at 2px 2px, rgba(0,0,0,0.15) 2px, transparent 0)`,
+          backgroundSize: '40px 40px',
+          backgroundPosition: `${mousePosition.x * 0.1}px ${mousePosition.y * 0.1}px`,
+          transform: `scale(${1 + Math.min(Math.sqrt(mousePosition.x * mousePosition.x + mousePosition.y * mousePosition.y) / 3000, 0.03)})`
         }}
       />
 
