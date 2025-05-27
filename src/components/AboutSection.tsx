@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { Award, Users, Coffee, Lightbulb } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -75,7 +76,7 @@ const AboutSection = () => {
                     key={index}
                     className={`px-4 py-2 text-sm font-light rounded-full transition-all duration-300 opacity-0 animate-[fade-in_0.6s_ease-out_forwards] hover:-translate-y-1 hover:scale-105 ${
                       isColorTheme 
-                        ? 'bg-primary/10 text-primary border border-primary/20 hover:border-primary/40 hover:shadow-md' 
+                        ? 'bg-gradient-to-r from-[#bcbc82] to-[#C9AF94] text-white border border-transparent hover:shadow-md' 
                         : 'bg-white text-gray-700 border border-gray-200 hover:border-gray-300 hover:shadow-md'
                     }`}
                     style={{ animationDelay: `${1000 + (index * 100)}ms` }}
@@ -97,11 +98,11 @@ const AboutSection = () => {
                 style={{ animationDelay: `${600 + (index * 150)}ms` }}
               >
                 <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full mb-4 group-hover:scale-110 transition-all duration-300 ${
-                  isColorTheme ? 'bg-primary/10' : 'bg-gray-100'
-                } group-hover:${isColorTheme ? 'bg-primary/20' : 'bg-gray-200'}`}>
+                  isColorTheme ? 'bg-gradient-to-r from-[#bcbc82] to-[#C9AF94]' : 'bg-gray-100'
+                } group-hover:${isColorTheme ? 'shadow-lg' : 'bg-gray-200'}`}>
                   <stat.icon 
                     size={24} 
-                    className={`${isColorTheme ? 'text-primary' : 'text-gray-700'} group-hover:scale-110 transition-transform duration-300`} 
+                    className={`${isColorTheme ? 'text-white' : 'text-gray-700'} group-hover:scale-110 transition-transform duration-300`} 
                   />
                 </div>
                 <div className="text-3xl font-light text-gray-900 mb-2 group-hover:scale-105 transition-transform duration-300">

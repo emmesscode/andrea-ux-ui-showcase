@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { Search, Lightbulb, Hammer, TestTube } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -116,7 +117,7 @@ const ProcessSection = () => {
                   <div className="flex items-center mb-8">
                     <span className={`text-8xl font-light transition-all duration-700 ${
                       isActive 
-                        ? isColorTheme ? 'text-primary' : 'text-gray-900'
+                        ? isColorTheme ? 'bg-gradient-to-r from-[#bcbc82] to-[#C9AF94] bg-clip-text text-transparent' : 'text-gray-900'
                         : 'text-gray-300'
                     }`}>
                       {step.number}
@@ -124,7 +125,7 @@ const ProcessSection = () => {
                     <div className={`ml-6 p-4 rounded-2xl transition-all duration-700 ${
                       isActive 
                         ? isColorTheme 
-                          ? 'bg-primary text-white' 
+                          ? 'bg-gradient-to-r from-[#bcbc82] to-[#C9AF94] text-white' 
                           : 'bg-gray-900 text-white'
                         : 'bg-gray-200 text-gray-400'
                     }`}>
@@ -154,7 +155,7 @@ const ProcessSection = () => {
                           className={`p-3 rounded-lg text-sm font-light transition-all duration-700 ${
                             isActive 
                               ? isColorTheme
-                                ? 'bg-primary/10 text-gray-700 border border-primary/20'
+                                ? 'bg-gradient-to-r from-[#bcbc82]/10 to-[#C9AF94]/10 text-gray-700 border border-[#bcbc82]/20'
                                 : 'bg-white text-gray-700 shadow-sm'
                               : 'bg-gray-100 text-gray-400'
                           }`}
@@ -168,7 +169,7 @@ const ProcessSection = () => {
                   {/* Progress Indicator */}
                   <div className={`absolute -left-6 top-0 w-1 h-full rounded-full transition-all duration-700 ${
                     isActive 
-                      ? isColorTheme ? 'bg-primary' : 'bg-gray-900'
+                      ? isColorTheme ? 'bg-gradient-to-b from-[#bcbc82] to-[#C9AF94]' : 'bg-gray-900'
                       : 'bg-gray-200'
                   }`} />
                 </div>

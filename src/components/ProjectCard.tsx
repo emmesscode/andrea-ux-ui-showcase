@@ -72,7 +72,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
               key={tagIndex}
               className={`px-3 py-1 text-sm font-light rounded-full transition-all duration-300 hover:scale-105 ${
                 isColorTheme 
-                  ? 'bg-primary/10 text-primary hover:bg-primary/20' 
+                  ? 'bg-gradient-to-r from-[#bcbc82] to-[#C9AF94] text-white hover:shadow-md' 
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
               style={{ 
