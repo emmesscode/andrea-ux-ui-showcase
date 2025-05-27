@@ -104,8 +104,8 @@ const ProjectsSection = () => {
           const scrollProgress = Math.max(0, Math.min(1, (viewportHeight / 2 - sectionTop + effectiveSectionStart) / effectiveSectionHeight));
           
           // Calculate which project should be active
-          // Add a delay factor to make transitions happen when text is better positioned
-          const adjustedProgress = Math.max(0, scrollProgress - 0.1); // Delay by 10% of scroll
+          // Add a larger delay factor to make transitions happen later when text is properly centered
+          const adjustedProgress = Math.max(0, scrollProgress - 0.25); // Delay by 25% of scroll
           const projectProgress = adjustedProgress * projects.length;
           const projectIndex = Math.max(0, Math.min(Math.floor(projectProgress), projects.length - 1));
           
@@ -239,7 +239,7 @@ const ProjectsSection = () => {
                     </div>
                   </div>
                   
-                  {/* ... keep existing code (tags and button) */}
+                  {/* ... keep existing code (tags and button) the same ... */}
                   <div className="flex flex-wrap gap-3 mb-8">
                     {project.tags.map((tag, tagIndex) => (
                       <span
