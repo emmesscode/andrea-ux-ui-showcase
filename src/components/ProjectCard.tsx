@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { ExternalLink } from 'lucide-react';
+import { useTheme } from '@/contexts/ThemeContext';
 
 interface Project {
   id: number;
@@ -19,6 +20,7 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const { isColorTheme } = useTheme();
 
   return (
     <div 
@@ -68,7 +70,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => {
           {project.tags.map((tag, tagIndex) => (
             <span
               key={tagIndex}
-              className="px-3 py-1 bg-gray-100 text-gray-700 text-sm font-light rounded-full transition-all duration-300 hover:bg-gray-200 hover:scale-105"
+              className={`px-3 py-1 text-sm font-light rounded-full transition-all duration-300 hover:scale-105 ${
+                isColorTheme 
+                  ? 'bg-primary/10 text-primary hover:bg-primary/20' 
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
               style={{ 
                 animationDelay: `${(index * 200) + (tagIndex * 100)}ms`,
                 animation: 'fade-in 0.6s ease-out forwards'

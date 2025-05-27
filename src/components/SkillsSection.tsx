@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { Palette, Code, Database, Figma, Zap, Users, Lightbulb, Settings } from 'lucide-react';
 import { ThemedButton } from '@/components/ui/themed-button';
@@ -118,7 +119,10 @@ const SkillsSection = () => {
               >
                 <div className="flex flex-col items-center text-center">
                   <div className={`w-16 h-16 ${isColorTheme ? skill.color : 'bg-gray-100'} rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-all duration-300`}>
-                    <skill.icon size={24} className="text-gray-700 group-hover:scale-110 transition-transform duration-300" />
+                    <skill.icon 
+                      size={24} 
+                      className={`${isColorTheme ? 'text-primary' : 'text-gray-700'} group-hover:scale-110 transition-transform duration-300`} 
+                    />
                   </div>
                   <h4 className="text-lg font-light text-gray-900 mb-2 group-hover:scale-105 transition-transform duration-300">
                     {skill.name}
