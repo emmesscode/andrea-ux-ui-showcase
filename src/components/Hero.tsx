@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { ArrowDown } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -32,7 +31,7 @@ const Hero = () => {
           }}
         >
           <h1 className={`text-5xl md:text-7xl font-light mb-6 tracking-tight opacity-0 animate-[fade-in_1s_ease-out_0.2s_forwards] ${
-            isColorTheme ? 'text-primary' : 'text-gray-900'
+            isColorTheme ? 'bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent' : 'text-gray-900'
           }`}>
             Andrea
           </h1>
