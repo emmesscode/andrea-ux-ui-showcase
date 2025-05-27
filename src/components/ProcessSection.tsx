@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { Search, Lightbulb, Hammer, TestTube } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -155,7 +154,7 @@ const ProcessSection = () => {
                           className={`p-3 rounded-lg text-sm font-light transition-all duration-700 ${
                             isActive 
                               ? isColorTheme
-                                ? 'bg-gradient-to-r from-[#bcbc82]/10 to-[#C9AF94]/10 text-gray-700 border border-[#bcbc82]/20'
+                                ? 'bg-white bg-gradient-to-r from-[#bcbc82] to-[#C9AF94] bg-clip-text text-transparent border border-gray-200'
                                 : 'bg-white text-gray-700 shadow-sm'
                               : 'bg-gray-100 text-gray-400'
                           }`}

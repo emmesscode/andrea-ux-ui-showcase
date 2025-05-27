@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 
@@ -259,7 +258,7 @@ const ProjectsSection = () => {
                             key={stepIndex}
                             className={`px-3 py-1 text-xs font-light rounded-full ${
                               isColorTheme 
-                                ? 'bg-gradient-to-r from-[#bcbc82] to-[#C9AF94] text-white'
+                                ? 'bg-white bg-gradient-to-r from-[#bcbc82] to-[#C9AF94] bg-clip-text text-transparent border border-gray-200'
                                 : 'bg-gray-900 text-white'
                             }`}
                           >
@@ -276,7 +275,7 @@ const ProjectsSection = () => {
                         key={tagIndex}
                         className={`px-4 py-2 text-sm font-light rounded-full transition-all duration-300 ${
                           isColorTheme 
-                            ? 'bg-gradient-to-r from-[#bcbc82] to-[#C9AF94] text-white hover:shadow-md'
+                            ? 'bg-white bg-gradient-to-r from-[#bcbc82] to-[#C9AF94] bg-clip-text text-transparent hover:shadow-md border border-gray-200'
                             : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                         }`}
                       >
