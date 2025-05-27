@@ -75,7 +75,7 @@ const SkillsSection = () => {
           backgroundImage: `radial-gradient(circle at 2px 2px, rgba(0,0,0,0.15) 2px, transparent 0)`,
           backgroundSize: '40px 40px',
           backgroundPosition: `${mousePosition.x * 0.1}px ${mousePosition.y * 0.1}px`,
-          transform: `scale(${1 + Math.min(Math.sqrt((mousePosition.x - sectionRef.current?.clientWidth / 2) * (mousePosition.x - sectionRef.current?.clientWidth / 2) + (mousePosition.y - sectionRef.current?.clientHeight / 2) * (mousePosition.y - sectionRef.current?.clientHeight / 2)) / 800, 0.5)})`,
+          transform: `scale(${1 + Math.min(Math.sqrt((mousePosition.x - sectionRef.current?.clientWidth / 2) * (mousePosition.x - sectionRef.current?.clientWidth / 2) + (mousePosition.y - sectionRef.current?.clientHeight / 2) * (mousePosition.y - sectionRef.current?.clientHeight / 2)) / 800, 0.2)})`,
           transformOrigin: `${mousePosition.x}px ${mousePosition.y}px`
         }}
       />
