@@ -5,6 +5,7 @@ import Hero from '../components/Hero';
 import ProcessSection from '../components/ProcessSection';
 import ProjectsSection from '../components/ProjectsSection';
 import AboutSection from '../components/AboutSection';
+import SkillsSection from '../components/SkillsSection';
 import ContactSection from '../components/ContactSection';
 import Footer from '../components/Footer';
 
@@ -16,6 +17,7 @@ const Index = () => {
       <ProcessSection />
       <ProjectsSection />
       <AboutSection />
+      <SkillsSection />
       <ContactSection />
       <Footer />
     </div>
