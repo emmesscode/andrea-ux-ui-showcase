@@ -3,7 +3,7 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 import { Button, ButtonProps } from './button';
 
-interface ThemedButtonProps extends ButtonProps {
+interface ThemedButtonProps extends Omit<ButtonProps, 'variant'> {
   variant?: 'primary' | 'secondary' | 'ghost' | 'outline';
 }
 
