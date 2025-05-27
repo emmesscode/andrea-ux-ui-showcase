@@ -1,9 +1,9 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { Palette, Code, Database, Figma, Zap, Users, Lightbulb, Settings } from 'lucide-react';
 
 const SkillsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -21,6 +21,24 @@ const SkillsSection = () => {
     }
 
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        setMousePosition({
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top
+        });
+      }
+    };
+
+    const section = sectionRef.current;
+    if (section) {
+      section.addEventListener('mousemove', handleMouseMove);
+      return () => section.removeEventListener('mousemove', handleMouseMove);
+    }
   }, []);
 
   const skills = [
@@ -48,8 +66,29 @@ const SkillsSection = () => {
   ];
 
   return (
-    <section id="skills" className="py-24 bg-gray-50 overflow-hidden" ref={sectionRef}>
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section id="skills" className="py-24 bg-gray-50 overflow-hidden relative" ref={sectionRef}>
+      {/* Mouse-following pattern */}
+      <div 
+        className="absolute inset-0 pointer-events-none opacity-20 transition-all duration-300 ease-out"
+        style={{
+          background: `radial-gradient(circle 200px at ${mousePosition.x}px ${mousePosition.y}px, 
+            rgba(0, 0, 0, 0.08) 0%, 
+            rgba(0, 0, 0, 0.03) 30%, 
+            transparent 70%)`
+        }}
+      />
+      
+      {/* Subtle dot pattern overlay */}
+      <div 
+        className="absolute inset-0 pointer-events-none opacity-30 transition-all duration-500 ease-out"
+        style={{
+          backgroundImage: `radial-gradient(circle at 1px 1px, rgba(0,0,0,0.1) 1px, transparent 0)`,
+          backgroundSize: '30px 30px',
+          transform: `scale(${1 + Math.min(Math.sqrt(mousePosition.x * mousePosition.x + mousePosition.y * mousePosition.y) / 2000, 0.05)})`
+        }}
+      />
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center mb-20">
           <h2 className={`text-4xl md:text-5xl font-light text-gray-900 mb-6 transition-all duration-1000 ${
