@@ -1,9 +1,11 @@
 
 import React, { useEffect, useState } from 'react';
 import { ArrowDown } from 'lucide-react';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const Hero = () => {
   const [scrollY, setScrollY] = useState(0);
+  const { isColorTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,7 +31,9 @@ const Hero = () => {
             opacity: Math.max(0, 1 - scrollY / 600)
           }}
         >
-          <h1 className="text-5xl md:text-7xl font-light text-gray-900 mb-6 tracking-tight opacity-0 animate-[fade-in_1s_ease-out_0.2s_forwards]">
+          <h1 className={`text-5xl md:text-7xl font-light mb-6 tracking-tight opacity-0 animate-[fade-in_1s_ease-out_0.2s_forwards] ${
+            isColorTheme ? 'text-primary' : 'text-gray-900'
+          }`}>
             Andrea
           </h1>
           <h2 className="text-xl md:text-2xl text-gray-600 mb-8 font-light max-w-2xl mx-auto leading-relaxed opacity-0 animate-[fade-in_1s_ease-out_0.4s_forwards]">
@@ -42,7 +46,9 @@ const Hero = () => {
           <div className="opacity-0 animate-[fade-in_1s_ease-out_0.8s_forwards]">
             <button
               onClick={scrollToProjects}
-              className="inline-flex items-center space-x-2 text-gray-700 hover:text-gray-900 transition-all duration-500 group relative overflow-hidden px-8 py-4 rounded-full border border-gray-200 hover:border-gray-300 bg-white/50 backdrop-blur-sm hover:bg-white/80 hover:shadow-lg hover:-translate-y-1"
+              className={`inline-flex items-center space-x-2 transition-all duration-500 group relative overflow-hidden px-8 py-4 rounded-full border border-gray-200 hover:border-gray-300 bg-white/50 backdrop-blur-sm hover:bg-white/80 hover:shadow-lg hover:-translate-y-1 ${
+                isColorTheme ? 'text-primary hover:text-primary' : 'text-gray-700 hover:text-gray-900'
+              }`}
             >
               <span className="font-light relative z-10">View My Work</span>
               <ArrowDown size={20} className="group-hover:translate-y-1 transition-transform duration-300 relative z-10" />
