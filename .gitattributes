@@ -1,5 +1,7 @@
-*.js text/javascript
-*.mjs text/javascript
-*.ts text/typescript
-*.tsx text/typescript-jsx
-*.jsx text/javascript-jsx
+*.js text
+*.mjs text
+*.ts text
+*.tsx text
+*.jsx text
+*.css text
+*.html text
