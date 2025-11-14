@@ -103,9 +103,26 @@ const ProjectsSection = () => {
           const totalScrollableHeight = sectionHeight - headerOffset - viewportHeight;
           const scrollProgress = Math.max(0, Math.min(1, scrollIntoSection / totalScrollableHeight));
           
-          // Calculate which project should be active based on scroll position
-          // Each project takes up equal space in the scroll area
-          const projectIndex = Math.max(0, Math.min(Math.floor(scrollProgress * projects.length), projects.length - 1));
+          // Improved project index calculation with better timing
+          // Add some overlap between projects and adjust timing for better UX
+          let projectIndex = 0;
+          
+          if (projects.length === 4) {
+            // Custom timing for 4 projects to fix the last two items
+            if (scrollProgress < 0.2) {
+              projectIndex = 0;
+            } else if (scrollProgress < 0.45) {
+              projectIndex = 1;
+            } else if (scrollProgress < 0.75) {
+              projectIndex = 2;
+            } else {
+              projectIndex = 3;
+            }
+          } else {
+            // Fallback for other numbers of projects
+            const segmentSize = 1 / projects.length;
+            projectIndex = Math.min(Math.floor(scrollProgress / segmentSize), projects.length - 1);
+          }
           
           setActiveProject(projectIndex);
           setScrollY(scrollProgress);
