@@ -155,8 +155,8 @@ const ProjectsSection = () => {
 
       {/* Projects Section */}
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Main Content */}
-        <div className="flex items-start relative" style={{ minHeight: `${100 + (projects.length * 100)}vh` }}>
+        {/* Desktop Layout - Hidden on Mobile */}
+        <div className="hidden md:flex items-start relative" style={{ minHeight: `${100 + (projects.length * 100)}vh` }}>
           {/* Fixed Image Container - Left Side */}
           <div className="w-1/2 sticky top-1/2 transform -translate-y-1/2 pr-12 z-10">
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
@@ -321,6 +321,113 @@ const ProjectsSection = () => {
             {/* Add bottom spacing to ensure last project aligns properly */}
             <div className="h-96"></div>
           </div>
+        </div>
+
+        {/* Mobile Layout - Card-based Design */}
+        <div className="md:hidden space-y-8">
+          {projects.map((project, index) => (
+            <div
+              key={project.id}
+              className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-500"
+            >
+              {/* Mobile Image */}
+              <div className="relative aspect-[16/10] overflow-hidden">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+              </div>
+              
+              {/* Mobile Content */}
+              <div className="p-6 space-y-4">
+                <div>
+                  <p className={`text-xs font-light uppercase tracking-wider mb-2 ${
+                    isColorTheme 
+                      ? 'bg-gradient-to-r from-[#bcbc82] to-[#C9AF94] bg-clip-text text-transparent'
+                      : 'text-gray-500'
+                  }`}>
+                    {project.category}
+                  </p>
+                  <h3 className="text-2xl font-light text-gray-900 mb-3 leading-tight">
+                    {project.title}
+                  </h3>
+                  <p className="text-gray-600 font-light leading-relaxed mb-4">
+                    {project.description}
+                  </p>
+                </div>
+
+                {/* Mobile Case Study Details - Collapsible */}
+                <div className="space-y-4">
+                  {/* Challenge */}
+                  <div>
+                    <h4 className={`text-xs font-medium uppercase tracking-wider mb-2 ${
+                      isColorTheme 
+                        ? 'bg-gradient-to-r from-[#bcbc82] to-[#C9AF94] bg-clip-text text-transparent'
+                        : 'text-gray-900'
+                    }`}>Challenge</h4>
+                    <p className="text-sm text-gray-600 font-light leading-relaxed">
+                      {project.problem}
+                    </p>
+                  </div>
+
+                  {/* Solution */}
+                  <div>
+                    <h4 className={`text-xs font-medium uppercase tracking-wider mb-2 ${
+                      isColorTheme 
+                        ? 'bg-gradient-to-r from-[#bcbc82] to-[#C9AF94] bg-clip-text text-transparent'
+                        : 'text-gray-900'
+                    }`}>Solution</h4>
+                    <p className="text-sm text-gray-600 font-light leading-relaxed">
+                      {project.solution}
+                    </p>
+                  </div>
+
+                  {/* Key Metrics - Mobile Grid */}
+                  <div>
+                    <h4 className={`text-xs font-medium uppercase tracking-wider mb-3 ${
+                      isColorTheme 
+                        ? 'bg-gradient-to-r from-[#bcbc82] to-[#C9AF94] bg-clip-text text-transparent'
+                        : 'text-gray-900'
+                    }`}>Impact</h4>
+                    <div className="grid grid-cols-2 gap-3">
+                      {project.metrics.map((metric, metricIndex) => (
+                        <div key={metricIndex} className={`text-center p-3 rounded-lg ${
+                          isColorTheme 
+                            ? 'bg-gradient-to-r from-[#bcbc82]/10 to-[#C9AF94]/10 border border-[#bcbc82]/20'
+                            : 'bg-gray-50'
+                        }`}>
+                          <div className={`text-lg font-light mb-1 ${
+                            isColorTheme 
+                              ? 'bg-gradient-to-r from-[#bcbc82] to-[#C9AF94] bg-clip-text text-transparent'
+                              : 'text-gray-900'
+                          }`}>{metric.value}</div>
+                          <div className="text-xs text-gray-600 uppercase tracking-wider">{metric.label}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Mobile Tags */}
+                <div className="flex flex-wrap gap-2 pt-2">
+                  {project.tags.map((tag, tagIndex) => (
+                    <span
+                      key={tagIndex}
+                      className={`px-3 py-1 text-xs font-light rounded-full ${
+                        isColorTheme 
+                          ? 'bg-white bg-gradient-to-r from-[#bcbc82] to-[#C9AF94] bg-clip-text text-transparent border border-gray-200'
+                          : 'bg-gray-100 text-gray-700'
+                      }`}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
