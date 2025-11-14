@@ -104,24 +104,25 @@ const ProjectsSection = () => {
           const scrollProgress = Math.max(0, Math.min(1, scrollIntoSection / totalScrollableHeight));
           
           // Improved project index calculation with better timing
-          // Add some overlap between projects and adjust timing for better UX
+          // Images should change when each text section is centered in viewport
           let projectIndex = 0;
           
           if (projects.length === 4) {
-            // Custom timing for 4 projects to fix the last two items
-            if (scrollProgress < 0.2) {
+            // Adjusted timing - images change later when text is more centered
+            if (scrollProgress < 0.3) {
               projectIndex = 0;
-            } else if (scrollProgress < 0.45) {
+            } else if (scrollProgress < 0.55) {
               projectIndex = 1;
-            } else if (scrollProgress < 0.75) {
+            } else if (scrollProgress < 0.8) {
               projectIndex = 2;
             } else {
               projectIndex = 3;
             }
           } else {
-            // Fallback for other numbers of projects
+            // Fallback for other numbers of projects with delayed timing
             const segmentSize = 1 / projects.length;
-            projectIndex = Math.min(Math.floor(scrollProgress / segmentSize), projects.length - 1);
+            const delayedProgress = Math.max(0, scrollProgress - 0.1); // Add 10% delay
+            projectIndex = Math.min(Math.floor(delayedProgress / segmentSize), projects.length - 1);
           }
           
           setActiveProject(projectIndex);
